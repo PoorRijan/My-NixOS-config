@@ -134,7 +134,7 @@
     isNormalUser = true;    
     extraGroups = [ "networkmanager" "wheel"];
   };
-  home-manager.users.rijan = import ./home-manager/rijan.nix;
+  home-manager.users.rijan = import ./modules/home-manager/rijan.nix;
 
   programs.fish.enable = true;
   # this should enable zsh as the default shell
