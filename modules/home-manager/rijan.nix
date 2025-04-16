@@ -172,6 +172,19 @@
       zotero
     ];
 
+    programs.neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+    };
+
+    # Link the nvim config directory from the flake root
+    xdg.configFile."nvim" = {
+      # Path from rijan.nix up two levels (to root) then into nvim/
+      source = ../../configs/nvim;
+      recursive = true;
+    };
+
     programs.atuin = {
       enable = true;
       enableFishIntegration = true;
