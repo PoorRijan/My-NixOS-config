@@ -282,6 +282,7 @@
       tesseract4
       the-way
       thunderbird
+      tree
       tor-browser
       typst
       unzip
