@@ -53,6 +53,20 @@ return {
        },
     })
 
+    -- For nim_langserver
+    lspconfig.nim_langserver.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      -- Example setting from nim-lang/langserver docs if needed:
+      -- settings = {
+      --   nim = {
+      --     -- Specify path if it's not in PATH or you need a specific build
+      --     -- nimsuggestPath = "/path/to/your/nimsuggest",
+      --     -- nimlangserverPath = "/path/to/your/nimlangserver"
+      --   }
+      -- }
+    })
+
     -- Add setup calls here for any other LSP servers installed via Nix
     -- lspconfig.some_other_server.setup({ on_attach = on_attach, capabilities = capabilities })
 

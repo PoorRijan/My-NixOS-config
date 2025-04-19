@@ -3,7 +3,7 @@ return {
   build = ":TSUpdate",
   opts = {
     -- Your treesitter configuration here
-    ensure_installed = { "python"},
+    ensure_installed = { "python", "nim"},
     sync_install = false,
     auto_install = true,
     highlight = {

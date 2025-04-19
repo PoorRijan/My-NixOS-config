@@ -113,11 +113,12 @@
       logseq
       mailspring
       mercurial
+      mermaid-cli
       mosh
       ncurses
-      neovim
       nim
       nimble
+      nimlangserver
       nodePackages_latest.wrangler
       notcurses
       obs-studio
