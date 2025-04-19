@@ -1,49 +1,34 @@
 # configuration.nix (or hosts/nixos/configuration.nix)
 
-{ config, pkgs, lib, ... }: # Ensure lib is available if needed by imported modules
+{ config, pkgs, lib, ... }: # Ensure lib is available if needed
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix # Or ./hosts/nixos/hardware-configuration.nix if using that structure
-      # Import your new modules
-      ./modules/nixos/dns.nix
+    [
+      ./hardware-configuration.nix
+
+      # --- Core System Modules ---
+      ./modules/nixos/locale.nix     # Moved (includes timezone & i18n)
+      ./modules/nixos/networking.nix # Moved (includes hostname & networkmanager)
+      ./modules/nixos/bootloader.nix
+      # --- Services & Hardware ---
+      ./modules/nixos/audio.nix
+      ./modules/nixos/DNS.nix
+      ./modules/nixos/kbfs.nix       # Moved
       ./modules/nixos/postgres.nix
       ./modules/nixos/printing.nix
-      ./modules/nixos/audio.nix
+      ./modules/nixos/xserver.nix    # Moved (includes xorg, gdm, gnome)
 
-      # Keep your custom package imports (consider moving to overlays later)
+      # --- Custom Packages (Consider Overlays) ---
       ./personal/plink2.nix
       ./personal/snpeff.nix
 
-      # Import home-manager config (unless handled directly in flake.nix)
-      # ./modules/home-manager/rijan.nix # Keep this if not using the flake.nix HM setup
+      # --- Home Manager (if not handled in flake.nix) ---
+      # ./modules/home-manager/rijan.nix
     ];
 
   # --- Remaining Configuration ---
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/Chicago";
-  i18n.defaultLocale = "en_US.UTF-8";
-  # ... keep other i18n settings ...
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
-  };
-
-  # Keybase/KBFS settings
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
-  services.kbfs.mountPoint = "/home/rijan/keybase/";
+  # (Should be getting smaller!)
 
   # Nix Flakes settings
   nix = {
@@ -53,30 +38,33 @@
     '';
   };
 
-  # User account definition
+  # User account definition (Could be moved to users.nix module later)
   users.users.rijan = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel"]; # Keep existing groups
-    shell = pkgs.fish; # Define shell here
-    useDefaultShell = true; # This might be redundant if shell is set, but ok
+    extraGroups = [ "networkmanager" "wheel"]; # networkmanager group added by default if using networking.networkmanager module
+    shell = pkgs.fish;
+    useDefaultShell = true;
   };
 
-  # Home Manager setup (remove if handled directly in flake.nix as recommended previously)
-  # If you keep it here, ensure the path is correct
+  # Home Manager setup (if not handled in flake.nix)
   home-manager.users.rijan = import ./modules/home-manager/rijan.nix;
 
   # Fish shell program enable (might be better in home-manager)
   programs.fish.enable = true;
 
-  # System packages (keep this minimal, user packages belong in home-manager)
+  # System packages (keep minimal)
   environment.systemPackages = with pkgs; [
-    # Add essential system-wide tools if any, e.g., wget, curl, git?
+    # vim
+    # wget
   ];
 
-  # --- System Auto Upgrade (Corrected Placement) ---
-  system.autoUpgrade.enable = true; # Place it here
-  system.autoUpgrade.allowReboot = true; # Place it here
+  # System Auto Upgrade (Corrected Placement)
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 
   # System state version - VERY IMPORTANT
   system.stateVersion = "24.11"; # Or your actual state version
+
+  # --- REMOVED SECTIONS ---
+  # All sections corresponding to the new modules created above should be gone from here.
 }
