@@ -12,5 +12,6 @@ require("lazy").setup({
     { import = "plugins/catppuccin" },
     { import = "plugins/lspconfig" },
     { import = "plugins/cmp" }, -- Add this line to load your new cmp config
+    { import = "plugins/onedark"},
   }
 })

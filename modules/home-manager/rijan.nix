@@ -18,6 +18,7 @@
         ape
         data_table
         ggtree
+        microbenchmark
         devtools
         igraph
         dplyr
