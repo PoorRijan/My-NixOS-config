@@ -4,3 +4,6 @@ nix flake update
 
 # Now do
 sudo nixos-rebuild switch --flake .#nixos # assumes your hostname is nixos
+
+# To rebuild boot use
+sudo nixos-rebuild boot --flake .#nixos
