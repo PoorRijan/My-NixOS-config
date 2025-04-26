@@ -1,74 +1,19 @@
 {pkgs, ...}:
 
 {
+
+  imports = [
+    ./python.nix
+    ./R.nix
+  ];
     home.packages = with pkgs;
-    let
-      my_R_packages_list = with rPackages; [
-        tidyverse
-        rPackages.languageserver
-        bslib
-        ggplot2
-        DT
-        ggpubr
-        shinyFiles
-        bigsnpr
-        ggExtra
-        plotly
-        shiny
-        ape
-        data_table
-        ggtree
-        microbenchmark
-        devtools
-        igraph
-        dplyr
-        argparse
-        rPackages.IRkernel
-        shinyBS
-        reactlog
-        rlang
-        svglite
-        phylotools
-      ];
-      
-      RStudio-with-my-packages = rstudioWrapper.override{
-        packages = my_R_packages_list;
-      };
-      R-with-my-packages = rWrapper.override{
-        packages = my_R_packages_list;
-      };
-      python-with-my-packages = python3.withPackages (ps: with ps; [
-        numpy
-        pandas
-        matplotlib
-        spyder
-        spyder-kernels
-        python312Packages.psycopg2
-        python312Packages.pyarrow
-        python312Packages.marimo
-        python312Packages.duckdb
-        python312Packages.pysam
-        python312Packages.ipykernel
-        python312Packages.jupyterlab
-        python312Packages.polars
-        python312Packages.qtconsole
-        python312Packages.newick
-        python312Packages.ete3
-        python312Packages.xlsx2csv
-        python312Packages.flask
-        python312Packages.sqlalchemy
-        python312Packages.flask-sqlalchemy
-        python312Packages.werkzeug
-        python312Packages.flask-session
-        python312Packages.pyqt6
-      ]);
-    in
      [
       anki-bin
       atuin
       authenticator
       autoconf269
       automake115x
+      audacity
       awscli2
       backblaze-b2
       bcftools
@@ -111,6 +56,7 @@
       lazygit
       libgcc
       libreoffice
+      libsForQt5.kdenlive
       logseq
       mailspring
       mercurial
@@ -131,12 +77,9 @@
       postgresql_16
       protonvpn-gui
       pyright
-      python-with-my-packages
-      R-with-my-packages
       rclone
       ripcord
       ripgrep
-      RStudio-with-my-packages
       rustc
       samba4Full
       sioyek
