@@ -93,6 +93,7 @@
       tesseract4
       the-way
       thunderbird
+      tinymist
       tree
       tor-browser
       typst
@@ -111,6 +112,7 @@
       zed-editor
       zellij
       zig
+      zip
       zlib
       zlib.dev
       zoom-us
