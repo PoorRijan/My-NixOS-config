@@ -67,6 +67,10 @@ return {
       -- }
     })
 
+    lspconfig.tinymist.setup({
+        on_attach = on_attach,
+        capabilities = capabilities
+    })
     -- Add setup calls here for any other LSP servers installed via Nix
     -- lspconfig.some_other_server.setup({ on_attach = on_attach, capabilities = capabilities })
 
