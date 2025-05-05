@@ -1,28 +1,38 @@
 # modules/nixos/printing.nix
 { config, pkgs, ... }:
-
 {
-  # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint ]; # Add other drivers if needed e.g. pkgs.hplip
-    browsing = true; # Enable network printer discovery
-    browsedConf = ''
-      BrowseDNSSDSubTypes _cups,_print
-      BrowseLocalProtocols all
-      BrowseRemoteProtocols all
-      CreateIPPPrinterQueues All
-      BrowseProtocols all
-    '';
+    drivers = [ pkgs.gutenprint ]; # Keep or expand this list
+
+    # --- Replace these lines ---
+    # Browse = true;
+    # browsedConf = ''
+    #   BrowseDNSSDSubTypes _cups,_print
+    #   BrowseLocalProtocols all
+    #   BrowseRemoteProtocols all
+    #   CreateIPPPrinterQueues All
+    #   BrowseProtocols all
+    # '';
+    # --- With these ---
+    discovery = {
+      enable = true; # Explicitly enable modern discovery using Avahi/DNS-SD
+      # This mimics your 'CreateIPPPrinterQueues All' setting.
+      # Alternatives: "Local" (only create for printers on localhost), "Manual" (don't auto-create)
+      createIPPPrinterQueues = "All";
+    };
+    # --- End Replacement ---
   };
 
-  # Avahi (mDNS/DNS-SD) is often needed for network printing discovery
   services.avahi = {
     enable = true;
-    nssmdns4 = true; # Enable mDNS for hostname resolution
-    openFirewall = true; # Open firewall ports for Avahi
-    # If you enable the firewall later, ensure CUPS ports (like 631) are open too.
-    # networking.firewall.allowedTCPPorts = [ 631 ];
-    # networking.firewall.allowedUDPPorts = [ 5353 ]; # For Avahi/mDNS
+    nssmdns4 = true;
+    openFirewall = true; # Good, handles Avahi firewall rules if firewall is enabled
   };
+
+  # Optional: Explicitly set admin group if not default 'wheel'
+  # services.printing.adminUserGroup = "lpadmin";
+
+  # Optional: Ensure CUPS port is open if using NixOS firewall elsewhere
+  # networking.firewall.allowedTCPPorts = [ 631 ]; # For web UI access from network / printer sharing
 }

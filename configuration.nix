@@ -1,6 +1,6 @@
 # configuration.nix (or hosts/nixos/configuration.nix)
 
-{ config, pkgs, lib, ... }: # Ensure lib is available if needed
+{ config, pkgs, lib, inputs,... }: # Ensure lib is available if needed
 
 {
   imports =
@@ -18,11 +18,10 @@
       ./modules/nixos/postgres.nix
       ./modules/nixos/printing.nix
       ./modules/nixos/xserver.nix    # Moved (includes xorg, gdm, gnome)
-
+      ./modules/nixos/waydroid.nix
       # --- Custom Packages (Consider Overlays) ---
       ./personal/plink2.nix
       ./personal/snpeff.nix
-
       # --- Home Manager (if not handled in flake.nix) ---
       # ./modules/home-manager/rijan.nix
     ];
@@ -52,8 +51,13 @@
   # Fish shell program enable (might be better in home-manager)
   programs.fish.enable = true;
 
+  # I have been told this is needed for waydroid
+  services.xserver.displayManager.gdm.wayland = true;
   # System packages (keep minimal)
   environment.systemPackages = with pkgs; [
+    
+    ## Custom package installed using someone else's flake
+    inputs.lemFlake.packages.${pkgs.system}.lem-ncurses
     # vim
     # wget
   ];
