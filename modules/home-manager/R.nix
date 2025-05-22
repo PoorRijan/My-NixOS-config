@@ -28,6 +28,7 @@
       reactlog
       rlang
       svglite
+      purr
       phylotools
     ];
     
