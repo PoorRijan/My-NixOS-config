@@ -52,7 +52,6 @@
       julia
       kbfs
       keybase
-      kitty
       lazygit
       libgcc
       libreoffice
@@ -94,6 +93,7 @@
       the-way
       thunderbird
       tinymist
+      tmux
       tree
       tor-browser
       typst
@@ -109,8 +109,6 @@
       yazi
       yt-dlp
       ytdownloader
-      zed-editor
-      zellij
       zig
       zip
       zlib
