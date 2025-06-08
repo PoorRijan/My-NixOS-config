@@ -67,7 +67,7 @@
   system.autoUpgrade.allowReboot = true;
 
   # System state version - VERY IMPORTANT
-  system.stateVersion = "24.11"; # Or your actual state version
+  system.stateVersion = "25.05"; # Or your actual state version
 
   # --- REMOVED SECTIONS ---
   # All sections corresponding to the new modules created above should be gone from here.

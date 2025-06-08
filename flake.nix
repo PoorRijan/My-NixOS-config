@@ -11,7 +11,7 @@
     # containing almost all packages and the NixOS module system.
     # We pin it to a specific branch (`nixos-24.11`) for reproducibility.
     # This should ideally match the `system.stateVersion` in your configuration.nix.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     lemFlake = {
         url = "github:lem-project/lem"; 
@@ -21,7 +21,7 @@
     # configurations (dotfiles, packages, services).
     # We pin it to a branch compatible with our nixpkgs version (`release-24.11`).
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       # This line is crucial: it tells home-manager to use the *same* version
       # of nixpkgs that we defined above. This prevents conflicts.
       inputs.nixpkgs.follows = "nixpkgs";
