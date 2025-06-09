@@ -34,9 +34,9 @@
       fzf
       gccgo13
       gdb
-      ghostty
       gimp
       git
+      ghostty
       glab
       glibc
       gnome-podcasts
@@ -50,6 +50,7 @@
       jellyfin-ffmpeg
       joplin-desktop
       julia
+      kitty
       kbfs
       keybase
       lazygit
@@ -60,6 +61,7 @@
       mailspring
       mercurial
       mermaid-cli
+      monophony
       mosh
       ncurses
       nim
@@ -109,6 +111,7 @@
       yazi
       yt-dlp
       ytdownloader
+      zellij
       zig
       zip
       zlib
