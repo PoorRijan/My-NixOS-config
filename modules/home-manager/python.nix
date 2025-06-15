@@ -27,43 +27,7 @@
       werkzeug
       flask-session
       pyqt6
-
-      # For meloTTS
-      txtsplit
-      torch
-      torchaudio
-      cached_path
-      transformers
-      num2words
-      unidic_lite
-      unidic
-      mecab-python3
-      pykakasi
-      fugashi
-      g2p_en
-      anyascii
-      jamo
-      gruut
-      g2pkk
-      librosa
-      pydub
-      eng_to_ipa
-      inflect
-      unidecode
-      pypinyin
-      cn2an
-      jieba
-      gradio
-      langid
-      tqdm
-      tensorboard
-      loguru
-
-    ]
-      ++ gruut.optional-dependencies.de
-      ++ gruut.optional-dependencies.es
-      ++ gruut.optional-dependencies.fr
-    );
+    ]);
     
   in
     [
