@@ -43,7 +43,7 @@
       g2p_en
       anyascii
       jamo
-      gruut[de,es,fr]
+      gruut
       g2pkk
       librosa
       pydub
@@ -59,7 +59,12 @@
       tensorboard
       loguru
 
-    ]);
+    ]
+      ++ gruut.optional-dependencies.de
+      ++ gruut.optional-dependencies.es
+      ++ gruut.optional-dependencies.fr
+    );
+    
   in
     [
       python-with-my-packages
